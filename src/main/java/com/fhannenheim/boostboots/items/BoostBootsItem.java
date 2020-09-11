@@ -3,30 +3,21 @@ package com.fhannenheim.boostboots.items;
 import com.fhannenheim.boostboots.BoostBoots;
 import com.fhannenheim.boostboots.model.BootModel;
 import net.minecraft.client.renderer.entity.model.BipedModel;
-import net.minecraft.client.renderer.entity.model.ElytraModel;
-import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.IArmorVanishable;
-import net.minecraft.enchantment.QuickChargeEnchantment;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.IEquipable;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.*;
+import net.minecraft.item.ArmorItem;
+import net.minecraft.item.IArmorMaterial;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.*;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.world.World;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.SoundEvents;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
-
-import java.util.List;
-
-import static com.fhannenheim.boostboots.BoostBoots.MOD_ID;
 
 public class BoostBootsItem extends ArmorItem implements IArmorVanishable {
 
@@ -57,17 +48,12 @@ public class BoostBootsItem extends ArmorItem implements IArmorVanishable {
         return EquipmentSlotType.FEET;
     }
 
-    @Override
-    public void addInformation(ItemStack p_77624_1_, @Nullable World p_77624_2_, List<ITextComponent> p_77624_3_, ITooltipFlag p_77624_4_) {
-        p_77624_3_.add(new StringTextComponent("cat"));
-    }
-
 
     public static IArmorMaterial makeArmorMaterial() {
         return new IArmorMaterial() {
             @Override
             public int getDurability(EquipmentSlotType slot) {
-                return 0;
+                return 50;
             }
 
             @Override
@@ -97,7 +83,7 @@ public class BoostBootsItem extends ArmorItem implements IArmorVanishable {
 
             @Override
             public float getToughness() {
-                return 0;
+                return 1;
             }
 
             @Override

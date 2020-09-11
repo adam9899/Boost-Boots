@@ -4,16 +4,11 @@ import com.fhannenheim.boostboots.events.ClientEventHandler;
 import com.fhannenheim.boostboots.events.ServerEventHandler;
 import com.fhannenheim.boostboots.init.Items;
 import com.fhannenheim.boostboots.networking.Networking;
-import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -56,13 +51,6 @@ public class BoostBoots {
         ModelLoader.addSpecialModel(new ResourceLocation(BoostBoots.MOD_ID,"item/boost_boots"));
     }
 
-    @SubscribeEvent
-    public void onItemTooltip(ItemTooltipEvent event){
-        if(event.getItemStack().getItem() == Items.BOOST_BOOTS.get()){
-            event.getToolTip().remove(event.getToolTip().size()-1);
-            event.getToolTip().remove(event.getToolTip().size()-2);
-        }
-    }
 
     private void setup(final FMLCommonSetupEvent event) {
         Networking.registerMessages();

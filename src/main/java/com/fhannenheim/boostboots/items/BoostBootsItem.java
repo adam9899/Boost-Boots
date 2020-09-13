@@ -3,7 +3,6 @@ package com.fhannenheim.boostboots.items;
 import com.fhannenheim.boostboots.BoostBoots;
 import com.fhannenheim.boostboots.model.BootModel;
 import net.minecraft.client.renderer.entity.model.BipedModel;
-import net.minecraft.enchantment.IArmorVanishable;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -19,12 +18,12 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 
-public class BoostBootsItem extends ArmorItem implements IArmorVanishable {
+public class BoostBootsItem extends ArmorItem {
 
     public BoostBootsItem(Properties p_i48534_3_) {
         super(makeArmorMaterial(), EquipmentSlotType.FEET, p_i48534_3_);
     }
-    
+
 
     public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
         return repair.getItem() == Items.GUNPOWDER;
@@ -86,9 +85,5 @@ public class BoostBootsItem extends ArmorItem implements IArmorVanishable {
                 return 1;
             }
 
-            @Override
-            public float getKnockbackResistance() {
-                return 0F;
-            }
         };
     }}

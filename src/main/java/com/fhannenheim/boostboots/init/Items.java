@@ -9,9 +9,8 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class Items {
-    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, BoostBoots.MOD_ID);
-
-    public static final RegistryObject<Item> BOOST_BOOTS = ITEMS.register("boost_boots",()->new BoostBootsItem(
+    public static final DeferredRegister<Item> ITEMS = new DeferredRegister<>(ForgeRegistries.ITEMS, BoostBoots.MOD_ID);
+    public static final RegistryObject<Item> BOOST_BOOTS = ITEMS.register("boost_boots", () -> new BoostBootsItem(
             new Item.Properties()
                     .group(ItemGroup.TRANSPORTATION)
     ));

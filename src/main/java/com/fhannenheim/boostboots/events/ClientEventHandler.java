@@ -20,7 +20,7 @@ public class ClientEventHandler {
         Minecraft mc = Minecraft.getInstance();
         ClientPlayerEntity player = mc.player;
         if (player != null)
-            onGroundLastTick = player.isOnGround();
+            onGroundLastTick = player.onGround;
     }
 
     @OnlyIn(Dist.CLIENT)

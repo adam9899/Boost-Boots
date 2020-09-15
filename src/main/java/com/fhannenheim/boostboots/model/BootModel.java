@@ -3,11 +3,13 @@ package com.fhannenheim.boostboots.model;// Made with Blockbench 3.5.4
 // Paste this class into your mod and generate all required imports
 
 
+import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.client.renderer.entity.model.BipedModel;
-import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+
+import javax.annotation.Nonnull;
 
 public class BootModel extends BipedModel<LivingEntity> {
 	private final ModelRenderer RightRocket;
@@ -44,6 +46,12 @@ public class BootModel extends BipedModel<LivingEntity> {
 		this.bipedRightLeg.addChild(RightRocket);
 	}
 
+	@Override
+	public void render(@Nonnull MatrixStack matrixStack, @Nonnull IVertexBuilder vertexBuilder,
+					   int light, int overlay, float red, float green, float blue, float alpha) {
+		this.RightRocket.render(matrixStack, vertexBuilder, light, overlay);
+		this.LeftRocket.render(matrixStack, vertexBuilder, light, overlay);
+	}
 
 	public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {
 		modelRenderer.rotateAngleX = x;

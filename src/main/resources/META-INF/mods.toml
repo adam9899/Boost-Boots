@@ -52,3 +52,9 @@ This mod adds Boost Boots™, that let you double jump and fly for a while'''
     versionRange="[1.16.3]"
     ordering="NONE"
     side="BOTH"
+[[dependencies.boostboots]]
+    modId="curios"
+    mandatory=false
+    versionRange="[1.16.3-4.0.1.0]"
+    ordering="NONE"
+    side="BOTH"

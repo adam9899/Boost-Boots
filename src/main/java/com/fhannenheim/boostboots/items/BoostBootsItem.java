@@ -3,7 +3,10 @@ package com.fhannenheim.boostboots.items;
 import com.fhannenheim.boostboots.BoostBoots;
 import com.fhannenheim.boostboots.compat.CuriosCompat;
 import com.fhannenheim.boostboots.model.BootModel;
+import com.fhannenheim.boostboots.util.BoostUtils;
 import net.minecraft.client.renderer.entity.model.BipedModel;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.enchantment.IArmorVanishable;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -16,7 +19,6 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.fml.ModList;
 
 import javax.annotation.Nullable;
 
@@ -31,6 +33,10 @@ public class BoostBootsItem extends ArmorItem implements IArmorVanishable {
         return repair.getItem() == Items.GUNPOWDER;
     }
 
+    @Override
+    public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
+        return enchantment == Enchantments.FEATHER_FALLING;
+    }
 
     @OnlyIn(Dist.CLIENT)
     @Override
@@ -52,7 +58,7 @@ public class BoostBootsItem extends ArmorItem implements IArmorVanishable {
 
     @Override
     public ICapabilityProvider initCapabilities(ItemStack stack, CompoundNBT unused) {
-        if (ModList.get() != null && ModList.get().getModContainerById("curios").isPresent()) {
+        if (BoostUtils.isCuriosLoaded()) {
             return CuriosCompat.initCapabilities();
         }
         return super.initCapabilities(stack, unused);

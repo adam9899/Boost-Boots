@@ -15,8 +15,10 @@ public class ServerEventHandler {
     @SubscribeEvent
     public void onTick(TickEvent event) {
         BoostBoots.server.getPlayerList().getPlayers().forEach((player)->{
-            airBorneLastTick.put(player, !player.onGround);
-            if (player.onGround) {
+            airBorneLastTick.put(player,!player.isOnGround());
+            if(player.isOnGround())
+            {
+                player.abilities.allowFlying = false;
                 flag.put(player, false);
             }
         });

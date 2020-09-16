@@ -4,9 +4,7 @@ package com.fhannenheim.boostboots.model;// Made with Blockbench 3.5.4
 
 
 import net.minecraft.client.renderer.entity.model.BipedModel;
-import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 
 public class BootModel extends BipedModel<LivingEntity> {
@@ -42,12 +40,8 @@ public class BootModel extends BipedModel<LivingEntity> {
 
 		this.bipedLeftLeg.addChild(LeftRocket);
 		this.bipedRightLeg.addChild(RightRocket);
+		this.isChild = false;
 	}
 
 
-	public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {
-		modelRenderer.rotateAngleX = x;
-		modelRenderer.rotateAngleY = y;
-		modelRenderer.rotateAngleZ = z;
-	}
 }

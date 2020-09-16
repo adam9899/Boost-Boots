@@ -1,8 +1,13 @@
 package com.fhannenheim.boostboots.items;
 
 import com.fhannenheim.boostboots.BoostBoots;
+import com.fhannenheim.boostboots.compat.CuriosCompat;
 import com.fhannenheim.boostboots.model.BootModel;
+import com.fhannenheim.boostboots.util.BoostUtils;
 import net.minecraft.client.renderer.entity.model.BipedModel;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.Enchantments;
+import net.minecraft.enchantment.IArmorVanishable;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -10,18 +15,17 @@ import net.minecraft.item.ArmorItem;
 import net.minecraft.item.IArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 import javax.annotation.Nullable;
 
-public class BoostBootsItem extends ArmorItem {
+public class BoostBootsItem extends ArmorItem implements IArmorVanishable {
 
-    public BoostBootsItem(Properties p_i48534_3_) {
-        super(makeArmorMaterial(), EquipmentSlotType.FEET, p_i48534_3_);
+    public BoostBootsItem(Properties p_i48534_3_, IArmorMaterial material) {
+        super(material, EquipmentSlotType.FEET, p_i48534_3_);
     }
 
 
@@ -29,6 +33,10 @@ public class BoostBootsItem extends ArmorItem {
         return repair.getItem() == Items.GUNPOWDER;
     }
 
+    @Override
+    public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
+        return enchantment == Enchantments.FEATHER_FALLING;
+    }
 
     @OnlyIn(Dist.CLIENT)
     @Override
@@ -41,49 +49,19 @@ public class BoostBootsItem extends ArmorItem {
         return type == null ? BoostBoots.MOD_ID + ":textures/armor/boots.png" : "";
     }
 
+
     @Nullable
     @Override
     public EquipmentSlotType getEquipmentSlot(ItemStack stack) {
         return EquipmentSlotType.FEET;
     }
 
+    @Override
+    public ICapabilityProvider initCapabilities(ItemStack stack, CompoundNBT unused) {
+        if (BoostUtils.isCuriosLoaded()) {
+            return CuriosCompat.initCapabilities();
+        }
+        return super.initCapabilities(stack, unused);
+    }
 
-    public static IArmorMaterial makeArmorMaterial() {
-        return new IArmorMaterial() {
-            @Override
-            public int getDurability(EquipmentSlotType slot) {
-                return 50;
-            }
-
-            @Override
-            public int getDamageReductionAmount(EquipmentSlotType slot) {
-                return 0;
-            }
-
-            @Override
-            public int getEnchantability() {
-                return 0;
-            }
-
-            @Override
-            public SoundEvent getSoundEvent() {
-                return SoundEvents.ITEM_ARMOR_EQUIP_GENERIC;
-            }
-
-            @Override
-            public Ingredient getRepairMaterial() {
-                return Ingredient.fromItems(Items.GUNPOWDER);
-            }
-
-            @Override
-            public String getName() {
-                return "boostboots:boost_boots";
-            }
-
-            @Override
-            public float getToughness() {
-                return 1;
-            }
-
-        };
-    }}
+}

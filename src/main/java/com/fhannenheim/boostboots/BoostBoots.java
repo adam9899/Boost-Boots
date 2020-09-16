@@ -57,14 +57,6 @@ public class BoostBoots {
         BoostBoots.LOGGER.info("IMC sent");
     }
 
-    @OnlyIn(Dist.CLIENT)
-    @SubscribeEvent
-    public static void stitchTextures(TextureStitchEvent.Pre evt) {
-        if (evt.getMap().getTextureLocation() == PlayerContainer.LOCATION_BLOCKS_TEXTURE) {
-            evt.addSprite(new ResourceLocation(MOD_ID, "item/boot_slot"));
-        }
-    }
-
     @SubscribeEvent
     public void FMLServerStartedEvent(FMLServerStartedEvent event) {
         server = event.getServer();
@@ -73,6 +65,14 @@ public class BoostBoots {
 
     private void setup(final FMLCommonSetupEvent event) {
         Networking.registerMessages();
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    @SubscribeEvent
+    public static void stitchTextures(TextureStitchEvent.Pre evt) {
+        if (evt.getMap().getTextureLocation() == PlayerContainer.LOCATION_BLOCKS_TEXTURE) {
+            evt.addSprite(new ResourceLocation(MOD_ID, "item/boot_slot"));
+        }
     }
 
     @OnlyIn(Dist.CLIENT)

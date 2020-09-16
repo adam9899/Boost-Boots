@@ -8,6 +8,7 @@ import com.fhannenheim.boostboots.util.BoostUtils;
 import net.minecraft.inventory.container.PlayerContainer;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.Tuple;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ModelRegistryEvent;
@@ -24,7 +25,8 @@ import net.minecraftforge.fml.event.server.FMLServerStartedEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import top.theillusivec4.curios.api.SlotTypeMessage;
+import top.theillusivec4.curios.api.CuriosAPI;
+import top.theillusivec4.curios.api.imc.CurioIMCMessage;
 
 import static com.fhannenheim.boostboots.BoostBoots.MOD_ID;
 
@@ -50,9 +52,10 @@ public class BoostBoots {
     @SubscribeEvent
     public static void InterModEnqueueEvent(InterModEnqueueEvent event) {
         if (BoostUtils.isCuriosLoaded()) {
-            InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE, () -> new SlotTypeMessage.Builder("feet")
-                    .icon(new ResourceLocation(MOD_ID, "item/boot_slot"))
-                    .build());
+            InterModComms.sendTo("curios", CuriosAPI.IMC.REGISTER_TYPE, () -> new CurioIMCMessage("feet"));
+            InterModComms.sendTo("curios", CuriosAPI.IMC.REGISTER_ICON, () ->
+                    new Tuple<>("feet", new ResourceLocation(MOD_ID, "item/boot_slot"))
+            );
         }
         BoostBoots.LOGGER.info("IMC sent");
     }

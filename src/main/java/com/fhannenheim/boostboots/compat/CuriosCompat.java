@@ -19,9 +19,9 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.LazyOptional;
 import org.apache.commons.lang3.tuple.ImmutableTriple;
-import top.theillusivec4.curios.api.CuriosApi;
-import top.theillusivec4.curios.api.CuriosCapability;
-import top.theillusivec4.curios.api.type.capability.ICurio;
+import top.theillusivec4.curios.api.CuriosAPI;
+import top.theillusivec4.curios.api.capability.CuriosCapability;
+import top.theillusivec4.curios.api.capability.ICurio;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -36,7 +36,7 @@ public class CuriosCompat {
             private Object model;
 
             @Override
-            public void playRightClickEquipSound(LivingEntity livingEntity) {
+            public void playEquipSound(LivingEntity livingEntity) {
                 livingEntity.world.playSound(null, new BlockPos(livingEntity.getPositionVec()),
                         SoundEvents.ITEM_ARMOR_EQUIP_ELYTRA, SoundCategory.NEUTRAL, 1.0f, 1.0f);
             }
@@ -53,12 +53,12 @@ public class CuriosCompat {
             }
 
             @Override
-            public boolean canRender(String identifier, int index, LivingEntity livingEntity) {
+            public boolean hasRender(String identifier, LivingEntity livingEntity) {
                 return true;
             }
 
             @Override
-            public void render(String identifier, int index, MatrixStack matrixStack,
+            public void render(String identifier, MatrixStack matrixStack,
                                IRenderTypeBuffer renderTypeBuffer, int light, LivingEntity livingEntity, float limbSwing,
                                float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw,
                                float headPitch) {
@@ -85,7 +85,7 @@ public class CuriosCompat {
     }
 
     public static Optional<ImmutableTriple<String, Integer, ItemStack>> getBoostCurio(PlayerEntity player) {
-        return CuriosApi.getCuriosHelper().findEquippedCurio(Items.BOOST_BOOTS.get(), player);
+        return CuriosAPI.getCurioEquipped(Items.BOOST_BOOTS.get(), player);
     }
 
 }

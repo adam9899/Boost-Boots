@@ -14,7 +14,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class Items {
-    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, BoostBoots.MOD_ID);
+    public static final DeferredRegister<Item> ITEMS = new DeferredRegister(ForgeRegistries.ITEMS, BoostBoots.MOD_ID);
 
     public static final RegistryObject<Item> BOOST_BOOTS = ITEMS.register("boost_boots", () -> new BoostBootsItem(
             new Item.Properties().group(ItemGroup.TRANSPORTATION)
@@ -58,10 +58,6 @@ public class Items {
                 return 1;
             }
 
-            @Override
-            public float getKnockbackResistance() {
-                return 0F;
-            }
         };
     }
 }

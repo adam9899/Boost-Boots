@@ -7,7 +7,6 @@ import com.fhannenheim.boostboots.util.BoostUtils;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.Enchantments;
-import net.minecraft.enchantment.IArmorVanishable;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -22,7 +21,7 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 import javax.annotation.Nullable;
 
-public class BoostBootsItem extends ArmorItem implements IArmorVanishable {
+public class BoostBootsItem extends ArmorItem {
 
     public BoostBootsItem(Properties p_i48534_3_, IArmorMaterial material) {
         super(material, EquipmentSlotType.FEET, p_i48534_3_);

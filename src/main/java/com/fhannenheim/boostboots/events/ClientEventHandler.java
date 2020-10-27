@@ -30,6 +30,8 @@ public class ClientEventHandler {
         if (event.getKey() == 32 && event.getAction() == 1) {
             Minecraft mc = Minecraft.getInstance();
             ClientPlayerEntity player = mc.player;
+            if (player == null)
+                return;
             if (!onGroundLastTick && BoostUtils.hasBoostBoots(player)) {
                 Networking.sendToServer(new PacketDoBoost());
             }
